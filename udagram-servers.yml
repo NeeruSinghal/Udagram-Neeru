@@ -75,7 +75,6 @@ Resources:
   ServerInstanceProfile:
     Type: "AWS::IAM::InstanceProfile"
     Properties:
-      InstanceProfileName: "S3BucketAccessProfile"
       Path: "/"
       Roles:
       - !Ref ServerIAMRole
@@ -83,16 +82,7 @@ Resources:
   WebAppLaunchConfig:
       Type: AWS::AutoScaling::LaunchConfiguration
       Properties:
-        UserData:
-          Fn::Base64: !Sub |
-            #!/bin/bash
-            apt-get update -y
-            apt-get install apache2 -y
-            systemctl start apache2.service
-            cd /var/www/html
-            echo "Udacity Demo Web Server Up and Running!" > index.html
         ImageId: ami-003634241a8fcdec0
-        IamInstanceProfile: ServerInstanceProfile
         SecurityGroups:
         - Ref: WebServerSecGroup
         InstanceType: t2.medium
@@ -100,3 +90,14 @@ Resources:
         - DeviceName: "/dev/sdk"
           Ebs:
             VolumeSize: '10'
+
+  WebAppGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      VPCZoneIdentifier:
+      - Fn::ImportValue: 
+          !Sub "${EnvironmentName}-PUB-NETS"
+      LaunchConfigurationName:
+        Ref: WebAppLaunchConfig
+      MinSize: '1'
+      MaxSize: '1'
