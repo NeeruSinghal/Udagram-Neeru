@@ -164,3 +164,10 @@ Resources:
       VpcId: 
         Fn::ImportValue:
           Fn::Sub: "${EnvironmentName}-VPCID"
+
+Outputs:
+  ApplicationURL:
+    Description: The public URL of the LoadBalancer to launch the application
+    Value: !Join ['', ['http://', !GetAtt [WebAppLB, DNSName]]]
+    Export:
+        Name: !Sub ${EnvironmentName}-Application-URL
