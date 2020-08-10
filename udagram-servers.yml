@@ -83,6 +83,8 @@ Resources:
       Type: AWS::AutoScaling::LaunchConfiguration
       Properties:
         ImageId: ami-003634241a8fcdec0
+        IamInstanceProfile:
+          Ref: "ServerInstanceProfile"
         SecurityGroups:
         - Ref: WebServerSecGroup
         InstanceType: t2.medium
