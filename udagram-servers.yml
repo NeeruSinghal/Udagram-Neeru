@@ -75,6 +75,7 @@ Resources:
   ServerInstanceProfile:
     Type: "AWS::IAM::InstanceProfile"
     Properties:
+      InstanceProfileName: "S3BucketAccessProfile"
       Path: "/"
       Roles:
       - !Ref ServerIAMRole
@@ -91,8 +92,7 @@ Resources:
             cd /var/www/html
             echo "Udacity Demo Web Server Up and Running!" > index.html
         ImageId: ami-003634241a8fcdec0
-        IamInstanceProfile:
-        - !Ref ServerInstanceProfile
+        IamInstanceProfile: ServerInstanceProfile
         SecurityGroups:
         - Ref: WebServerSecGroup
         InstanceType: t2.medium
