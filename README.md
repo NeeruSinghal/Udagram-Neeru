@@ -10,4 +10,5 @@ This project contains file to deploy Udacity Udagram project.
 
 .\aws_create_stack.bat udagram-server-stack .\udagram-servers.yml .\udagram-server-params.json
 
-# Application URL will be avaialble in the "OUTPUT" section of Cloudformation stack of "udagram-server-stack"
+# Application URL 
+Application URL avaialble in the "OUTPUT" section of Cloudformation stack of "udagram-server-stack"
