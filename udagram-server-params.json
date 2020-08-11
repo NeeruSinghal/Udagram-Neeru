@@ -2,5 +2,13 @@
   {
       "ParameterKey" : "EnvironmentName",
       "ParameterValue" : "Udagram"
+  },
+  {
+    "ParameterKey" : "AMIImageId",
+    "ParameterValue" : "ami-003634241a8fcdec0"
+  },
+  {
+    "ParameterKey" : "AMIInstanceType",
+    "ParameterValue" : "t2.medium"
   }
 ]

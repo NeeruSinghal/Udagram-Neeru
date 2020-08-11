@@ -4,6 +4,14 @@ Parameters:
   EnvironmentName:
     Description: An environment name that would be prefixed to resources names
     Type: String
+
+  AMIImageId:
+    Description: ImageId of AMI to be used
+    Type: String
+
+  AMIInstanceType:
+    Description: InstanceType of the AMI to be used
+    Type: String
 Resources:
   LBSecGroup:
     Type: AWS::EC2::SecurityGroup
@@ -93,12 +101,12 @@ Resources:
             sudo aws s3 cp s3://udagram-demo/udacity-starter-website.zip /var/www/html
             sudo unzip /var/www/html/udacity-starter-website.zip -d /var/www/html
             systemctl restart apache2.service
-        ImageId: ami-003634241a8fcdec0
+        ImageId: !Ref AMIImageId
         IamInstanceProfile:
           Ref: "ServerInstanceProfile"
         SecurityGroups:
         - Ref: WebServerSecGroup
-        InstanceType: t2.medium
+        InstanceType: !Ref AMIInstanceType
         BlockDeviceMappings:
         - DeviceName: "/dev/sdk"
           Ebs:
